@@ -1,0 +1,41 @@
+from typing import List, Optional
+from fastapi import Header, APIRouter
+from fastapi import HTTPException
+
+
+from {{project_name}}.dto.{{ item.name }} import {{ item.name.capitalize() }}In, {{ item.name.capitalize() }}Out
+from {{project_name}}.api import db_manager
+
+{{ item.name.lower() }}s = APIRouter()
+
+@{{ item.name.lower() }}s.get('/{{ item.name.lower() }}s', response_model=List[{{ item.name.capitalize() }}Out], tags=["{{ item.name }}s"])
+async def index():
+    return await db_manager.get_all_{{ item.name.lower() }}s()
+
+@{{ item.name.lower() }}s.post('/{{ item.name.lower() }}/', status_code=201, tags=["{{ item.name }}s"])
+async def add_{{ item.name.lower() }}(payload: {{ item.name.capitalize() }}In):
+    {{ item.name.lower() }}_id = await db_manager.add_{{ item.name.lower() }}(payload)
+    response = {
+        'id': {{ item.name.lower() }}_id,
+        **payload.dict()
+    }
+    return response
+
+@{{ item.name.lower() }}s.put('/{{ item.name.lower() }}/{id}', tags=["{{ item.name }}s"])
+async def update_{{ item.name.lower() }}(id: int, payload: {{ item.name.capitalize() }}In, tags=["{{ item.name.lower() }}s"]):
+    {{ item.name.lower() }} = await db_manager.get_{{ item.name.lower() }}(id)
+    if not {{ item.name.lower() }}:
+        raise HTTPException(status_code=404, detail="{{ item.name.capitalize() }} not found")
+    update_data = payload.dict(exclude_unset=True)
+    {{ item.name.lower() }}_in_db = {{ item.name.capitalize() }}In(**{{ item.name.lower() }})
+    updated_{{ item.name.lower() }} = {{ item.name.lower() }}_in_db.copy(update=update_data)
+    return await db_manager.update_{{ item.name.lower() }}(id, updated_{{ item.name.lower() }})
+
+@{{ item.name.lower() }}s.delete('/{{ item.name.lower() }}/{id}', tags=["{{ item.name }}s"])
+async def delete_{{ item.name.lower() }}(id: int):
+    {{ item.name.lower() }} = await db_manager.get_{{ item.name.lower() }}(id)
+    if not {{ item.name.lower() }}:
+        raise HTTPException(status_code=404, detail="{{ item.name.capitalize() }} not found")
+    return await db_manager.delete_{{ item.name.lower() }}(id)
+
+    

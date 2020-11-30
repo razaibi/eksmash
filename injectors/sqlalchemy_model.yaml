@@ -1,0 +1,62 @@
+---
+    injectors:
+        configs: 
+          dbtype: postgresql
+          server: db_server
+          database: db_name
+          username: 80
+          password: AXNAUS
+        entities: 
+          - name: userprofile
+            attributes: 
+            - name: id
+              type: Integer
+              limit: 100
+              is_unique: false
+              is_primary: true
+              is_default: true
+              is_required: true
+            - name: name
+              type: String
+              searchable_by: false
+              is_unique: false
+              is_primary: false
+              is_default: false
+              is_required: true
+            - name: age
+              type: Integer
+              limit: 100
+              searchable_by: true
+              is_unique: true
+              is_primary: false
+              is_default: false
+              is_required: false
+            relations:
+            - name: chat
+              backref: userprofile.id
+          - name: chat
+            attributes: 
+            - name: id
+              type: Integer
+              limit: 100
+              is_unique: false
+              is_primary: true
+              is_default: false
+              is_required: false
+            - name: userprofile_id
+              type: Integer
+              limit: 100
+              searchable_by: true
+              is_unique: false
+              is_primary: false
+              is_default: false
+              is_required: false
+              foreign_key: userprofile.id
+            - name: content
+              type: String
+              searchable_by: false
+              is_unique: false
+              is_primary: false
+              is_default: false
+              is_required: false
+        

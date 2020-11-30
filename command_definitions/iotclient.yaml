@@ -1,0 +1,21 @@
+---
+    resources:
+        - name: 'Iot Client'
+          identifier: 'iotclient'
+          modes:
+            - test:
+                actions: 
+                    - name: 'Test'
+                      library: 'iotclient'
+                      method: 'test'
+                params:
+                    - name: 'app'
+                      shortcut: 'a'
+                      type: 'string'
+                      desc: 'Name of the IoT Client app.'
+                      isRequired: True
+                    - name: 'provider'
+                      shortcut: 'a'
+                      type: 'string'
+                      desc: 'Name of the cloud provider.'
+                      isRequired: True

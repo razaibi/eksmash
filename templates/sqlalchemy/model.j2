@@ -1,0 +1,17 @@
+from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
+from sqlalchemy.orm import relationship
+from database_connector import Base
+
+class {{entity_item['name'].capitalize()}}(Base):
+    __tablename__ = "{{entity_item['name'].lower()}}"
+    {%for attribute_item in entity_item['attributes'] %}
+    {{attribute_item['name']}} = Column({{attribute_item['type']}}
+    {%-if attribute_item['limit'] is not none %}({{attribute_item['limit']}}) {%-endif %}
+    {%-if attribute_item['is_unique'] == True %}, unique=True {%-endif %}
+    {%-if attribute_item['is_default'] == True %}, default=True {%-endif %}
+    {%-if 'foreign_key' in attribute_item and attribute_item['foreign_key'] is not none %}, ForeignKey=("{{attribute_item['foreign_key']}}") {%-endif %}
+    {%-if attribute_item['is_primary'] == True %}, primary_key=True {%-endif %})
+    {%-endfor %}
+    {%for relation_item in entity_item['relations'] %}
+    {{relation_item['name']}}s = relationship("{{relation_item['name']}}", backref="{{relation_item['backref']}}")
+    {%-endfor %}

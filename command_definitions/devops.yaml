@@ -1,0 +1,53 @@
+---
+    resources:
+        - name: 'DevOps Pipeline'
+          identifier: 'pipeline'
+          modes:
+            - get:
+                actions: 
+                    - name: 'Init'
+                      library: 'common'
+                      method: 'read_docs'
+                params:
+                    - name: 'name'
+                      shortcut: 'n'
+                      type: 'string'
+                      desc: 'Name of the pipeline.'
+                      isRequired: True
+                    - name: 'typer'
+                      shortcut: 't'
+                      type: 'string'
+                      desc: 'Name of the typer.'
+                      isRequired: False
+            - set:
+                actions: 
+                    - name: 'Init'
+                      action: 'common-->read_docs'
+                params:
+                    - name: 'name'
+                      shortcut: 'n'
+                      type: 'string'
+                      desc: 'Name of the pipeline.'
+                      isRequired: True
+        - name: 'Credentials'
+          identifier: 'creds'
+          modes:
+            - get:
+                actions: 
+                    - name: 'Login'
+                      action: 'common-->read_docs'
+                params:
+                    - name: 'clientId'
+                      shortcut: 'clId'
+                      type: 'string'
+                      desc: 'Client Id to access the credential storage.'
+                      isRequired: True
+                    - name: 'key'
+                      shortcut: 'k'
+                      type: 'string'
+                      desc: 'Key to access the credential storage.'
+                      isRequired: True
+
+
+
+

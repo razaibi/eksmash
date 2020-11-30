@@ -1,0 +1,10 @@
+---
+  resources:
+      - name: 'Faust App'
+        identifier: 'fastapi'
+        modes:
+          - init:
+              actions: 
+                  - name: 'Init'
+                    library: 'fastapi'
+                    method: 'initiate'

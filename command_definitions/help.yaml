@@ -1,0 +1,15 @@
+---
+    resources:
+        - name: 'Help Command'
+          identifier: 'help'
+          modes:
+            - get:
+                actions: 
+                    - name: 'Get Help'
+                      library: 'help'
+                      method: 'get_help'
+            - do:
+                actions: 
+                    - name: 'Get Help'
+                      library: 'help'
+                      method: 'get_help'

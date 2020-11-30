@@ -1,0 +1,21 @@
+---
+    resources:
+        - name: 'Projects'
+          identifier: 'project'
+          modes:
+            - set:
+                actions: 
+                    - name: 'set'
+                      library: 'projects'
+                      method: 'set'
+                params:
+                    - name: 'name'
+                      shortcut: 'n'
+                      type: 'string'
+                      desc: 'Name of the active project.'
+                      isRequired: True
+            - get:
+                actions: 
+                    - name: 'get'
+                      library: 'projects'
+                      method: 'get'

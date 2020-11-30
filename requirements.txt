@@ -1,0 +1,10 @@
+psycopg2
+fastapi
+jinja2
+pyyaml
+requests
+faust
+azure.iot.device
+psycopg2-binary
+asyncpg
+uvicorn=0.12.3
