@@ -15,6 +15,7 @@ class Engine:
                     'data' : 'Invoke'
             }
         except Exception as e:
+            print(e)
             _error_handler = ErrorHandler()
             return _error_handler.raise_action_error(
                 actions[0]['library']

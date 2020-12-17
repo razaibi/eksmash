@@ -3,7 +3,7 @@ import config
 import os
 import core.session_manager as sm
 from core.command_definitions import Definition
-from core.workflow import Engine
+from core.action_manager import Engine
 from core.error import ErrorHandler
 
 class CParser:
@@ -50,7 +50,7 @@ class CParser:
                 _defined_params = self._get_defined_parameters(
                     _detected_mode, _verb
                 )
-                return self._call_workflow_engine(
+                return self._call_action_engine(
                 session,
                  _detected_mode, 
                  _verb,
@@ -62,7 +62,7 @@ class CParser:
             return _error_handler.raise_project_missing_error('')
 
             
-    def _call_workflow_engine(self, 
+    def _call_action_engine(self, 
         session,
         detected_mode, 
         verb, 
@@ -71,7 +71,7 @@ class CParser:
         #Check if actual parameters passed
         if  self._parameters_match(defined_params, actual_params):
             #If parameters match, invoke list of actions.
-            #Use workflow engine to invoke parameters.
+            #Use action engine to invoke parameters.
             _actions = detected_mode[0][verb]['actions']
             return self._call_actions(_actions, session, actual_params)
         else:
@@ -82,8 +82,8 @@ class CParser:
             }
         
     def _call_actions(self, actions, session, actual_params=None):
-        _workflow_engine = Engine(session)
-        return _workflow_engine.init_actions(
+        _action_engine = Engine(session)
+        return _action_engine.init_actions(
             actions, 
             actual_params
         )

@@ -22,3 +22,6 @@
 # Pending
 - Add @ to the YAML injectors to read from external files.
 - Add $ to refer to variables in the config files.
+- Add option to make errors verbose.
+- Prompt whenever current project is not setup from the prompt.
+  

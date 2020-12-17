@@ -2,6 +2,10 @@
 from {{project_name}}.dto.{{item.name}} import {{ item.name.capitalize() }}In, {{ item.name.capitalize() }}Out, {{ item.name.capitalize() }}Update
 from {{project_name}}.api.db import {{ item.name.lower() }}s
 {% endfor %}
+
+from {{project_name}}.dto.api_tokens import Token, TokenData, Client, ClientIn
+
+
 from {{project_name}}.api.db import database
 {%for item in classes-%}
 async def add_{{ item.name.lower() }}(payload: {{ item.name.capitalize() }}In):

@@ -1,6 +1,6 @@
 #Define custom actions here.
 import actions.common as ac
-import actions.core as core
+from core.workflow_manager import Workflow
 import template_logic.fastapi as tl
 import config
 import os
@@ -8,7 +8,7 @@ import os
 class Executor:
     '''Class to manage actions for Fast API.'''
     def __init__(self, params):
-        self._workflow = core.Workflow('wf_fastapi')
+        self.workflow = Workflow('wf_fastapi')
         self.params = params
         self.project = ac.session.get_last_project()
         self.api_injectors = ac.get_injectors('fastapi_api')
@@ -17,19 +17,25 @@ class Executor:
         self.db_injectors['project_name'] = self.project
             
     def initiate(self):
-        self._workflow.add_task(
-            'create_directory',
+        self.workflow.add_task(
+            'Create Project Directory',
             ac.create_directory,
             self.project
         )
-        #self._workflow.execute()
-        ac.create_directory(self.project)
-        self.generate_main()
-        self.generate_api()
-        self.generate_dtos()
-        self.generate_db()
-        self.generate_models()
-        self.generate_db_manager()
+        self.workflow.add_task(
+            'Generate Main',
+            self.generate_main
+        )
+
+
+        self.workflow.execute()
+        #ac.create_directory(self.project)
+        #self.generate_main()
+        #self.generate_api()
+        #self.generate_dtos()
+        #self.generate_db()
+        #self.generate_models()
+        #self.generate_db_manager()
 
     def generate_main(self):
         _rendered_template = ac.read_template(

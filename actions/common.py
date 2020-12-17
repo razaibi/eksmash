@@ -74,6 +74,16 @@ def create_directory(directory_name):
             if exc.errno != errno.EEXIST:
                 raise
 
+def create_folder(*path_items):
+    _path = os.path.join(path_items)
+    if not os.path.exists(_path):
+        try:
+            os.makedirs(_path)
+        except OSError as exc: # Guard against race condition
+            print(exc)
+            if exc.errno != errno.EEXIST:
+                raise
+
 def call_rest_endpoint(request_data):
     if not bool(request_data['url_params']):
         _rendered_url = render_url(request_data['url'], **request_data['url_params'])

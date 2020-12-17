@@ -1,14 +1,6 @@
 from enum import Enum
-
-class Executor:
-    '''Base class for managing, running actions.'''
-    def __init__(self):
-        pass
-
-    def add_task(self, name):
-        self.task_name = name
-        self.predecessor = None
-        self.priority = None
+from operator import itemgetter
+from functools import partial
 
 class Workflow:
     '''Setup workflow.'''
@@ -16,13 +8,13 @@ class Workflow:
         self.workflow_name = name
         self.workflow_tasks = []
 
-    def add_task(self, name, func):
-        new_task = Task(name)
+    def add_task(self, name, func, *args):
+        new_task = Task(name, func, args)
         self.workflow_tasks.append(new_task)
 
-    def execute(self, *args):
+    def execute(self):
         for item in self.workflow_tasks:
-            item.task_function(*args)
+            item.task_function(*item.task_function_args)
 
 class Task:
     '''Class to manage Tasks.
@@ -36,7 +28,7 @@ class Task:
     task_function_args = None
     exectuion_style = 'sync'
 
-    def __init__(self, name, func, *args):
+    def __init__(self, name, func, args):
         self.task_name = name
         self.state = TaskState(0)
         self.task_function = func

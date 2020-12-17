@@ -17,10 +17,15 @@ class Clx:
     def start():
         #TODO: setup listener for commands
         _session = sm.Session()
+        _last_project = _session.get_last_project()
         #TODO : Remove below line from prod code.
         _parser = CParser()
         Clx.clear_screen()
         Clx.print_banner()
+
+        if _last_project is None or _last_project == '':
+            print('\n**CAUTION : Project has not been set.**')
+            print('Please set project before you work.')
         while True:
             #command = input(colored('m#$h>', 'green', attrs=['bold']))
             command = input(
@@ -53,6 +58,7 @@ class Clx:
         print(Fore.MAGENTA + ' / _  )| | / ) /___)' + Fore.BLUE + '|    \  _| |__| | |___  || || \\')
         print(Fore.MAGENTA + '( (/ / | |< ( |___ |' + Fore.BLUE + '| | | |(_       _)(_   _|| | | |')
         print(Fore.MAGENTA + ' \____)|_| \_)(___/ ' + Fore.BLUE + '|_|_|_|  |__||_|    |_|  |_| |_|')
+        print(Fore.MAGENTA + '  beta')
         print(Fore.WHITE)
         print('Use verbs to initiate action.')
         print('Make sure parameters are clearly defined like below.')

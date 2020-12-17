@@ -1,6 +1,9 @@
 from typing import List, Optional
 from fastapi import Header, APIRouter
 from fastapi import HTTPException
+from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+from jose import JWTError, jwt
+from passlib.context import CryptContext
 
 
 from {{project_name}}.dto.{{ item.name }} import {{ item.name.capitalize() }}In, {{ item.name.capitalize() }}Out
