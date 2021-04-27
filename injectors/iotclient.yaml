@@ -1,5 +1,0 @@
----
-    injectors:
-        messages:
-          - name: 'message_type'
-            val: 'Hello Sweden'

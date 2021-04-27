@@ -1,9 +1,0 @@
----
-    injectors:
-        app_name: sample
-        broker: 'localhost:9092'
-        topic_name: test
-        messages:
-            - content: 'Hello PyCon!'
-            - content: 'Hello World!'
-

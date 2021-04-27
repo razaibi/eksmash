@@ -1,20 +1,10 @@
 import configparser
 import os
 
-class Session:
+class Manager:
     def __init__(self):
         self.state = None
-        self.provider = None
         self.project = self.get_last_project()
-
-    def set_provider(self, provider):
-        self.provider = provider
-
-    def has_provider(self):
-        if self.provider == None:
-            return False
-        else:
-            return True
 
     def set_state(self, state):
         self.state = state
