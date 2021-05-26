@@ -1,7 +1,10 @@
+<<<<<<< HEAD
 import os
 import CONFIGS
 import core.common
 
+=======
+>>>>>>> 2c59c584b84cd7a93781a1a2385b72244e6f4a0a
 def create_ddl(action, file):
     action_swticher = {
         "create" : create_new_database,
