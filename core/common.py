@@ -5,8 +5,11 @@ def read_yaml(file_path):
     documents=None
     with open(file_path) as file:
         documents = yaml.full_load(file)
-
     return documents
+
+
+def read_file(file_path):
+  return 0
 
 def read_template(template_type, template_name, params):
     _search_path = os.path.join(CONFIGS.INPUT_FOLDER,'templates','{}'.format(template_type))
